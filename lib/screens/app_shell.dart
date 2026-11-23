@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../services/image_sources.dart';
 import '../services/classifier.dart';
 import '../services/history_store.dart';
 import 'history_screen.dart';
@@ -18,6 +18,7 @@ class AppShell extends StatefulWidget {
 
 class _AppShellState extends State<AppShell> {
   int _index = 0;
+  final ImageSources _sources = ImageSources();
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,11 @@ class _AppShellState extends State<AppShell> {
       body: IndexedStack(
         index: _index,
         children: [
-          HomeScreen(classifier: widget.classifier, store: widget.store),
+          HomeScreen(
+            classifier: widget.classifier,
+            store: widget.store,
+            sources: _sources,
+          ),
           HistoryScreen(store: widget.store),
           ModelScreen(classifier: widget.classifier),
         ],
